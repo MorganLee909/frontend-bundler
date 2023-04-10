@@ -1,0 +1,22 @@
+{
+  "name": "frontend-bundler",
+  "version": "0.0.1",
+  "description": "Minimal bundler for frontend hybrid SPA's",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MorganLee909/frontend-bundler.git"
+  },
+  "author": "Lee Morgan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MorganLee909/frontend-bundler/issues"
+  },
+  "homepage": "https://github.com/MorganLee909/frontend-bundler#readme",
+  "dependencies": {
+    "esbuild": "^0.17.16"
+  }
+}
