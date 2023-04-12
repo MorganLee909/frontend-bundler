@@ -36,6 +36,22 @@ let readFile = (file, prevLoc = "")=>{
                 content += `<script>${js}</script>`;
                 i += 16;
                 fs.unlink("./dist/temp.js", (err)=>{if(err) console.error(err)});
+            }else if(a.slice(i, i+12) === "<css-module>"){
+                i += 12;
+                let module = "";
+                while(a[i] !== "<"){
+                    module += a[i];
+                    i++;
+                }
+                esbuild.buildSync({
+                    entryPoints: [path.join(newLoc, module)],
+                    bundle: true,
+                    outfile: "./dist/temp.css"
+                });
+                let css = fs.readFileSync("./dist/temp.css", fsOptions);
+                content += `<style>${css}</style>`;
+                i += 13;
+                fs.unlink("./dist/temp.css", (err)=>{if(err) console.error(err)});
             }else{
                 content += a[i];
             }
