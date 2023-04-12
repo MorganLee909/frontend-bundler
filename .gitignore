@@ -2,4 +2,3 @@ node_modules/
 .DS_Store
 testFiles/
 dist/
-*build.html
