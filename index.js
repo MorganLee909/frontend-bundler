@@ -1,11 +1,12 @@
 const esbuild = require("esbuild");
 const fs = require("fs");
+const path = require("path");
 
-let a = fs.readFileSync("./index.html", {encoding: "utf8"});
 let fsOptions = {encoding: "utf8"};
 
-let readFile = (file)=>{
-    let a = fs.readFileSync(file, fsOptions);
+let readFile = (file, prevLoc = "")=>{
+    let newLoc = path.join(prevLoc, path.dirname(file));
+    let a = fs.readFileSync(path.join(newLoc, path.basename(file)), fsOptions);
     let content = "";
 
     for(let i = 0; i < a.length; i++){
@@ -16,7 +17,7 @@ let readFile = (file)=>{
                 module += a[i];
                 i++;
             }
-            content += readFile(module);
+            content += readFile(module, newLoc);
             i += 14;
         }else{
             content += a[i];
@@ -26,6 +27,6 @@ let readFile = (file)=>{
     return content;
 }
 
-fs.writeFileSync("build.html", readFile("./index.html"));
+fs.writeFileSync("./dist/build.html", readFile("./testFiles/index.html"));
 
 module.exports = readFile;
